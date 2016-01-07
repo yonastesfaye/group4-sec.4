@@ -1,0 +1,100 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package encript;
+import java.util.*;
+
+public class Encript {
+
+   private static HashMap<String, String> codes = new HashMap<String, String>();
+
+    public static void main(String[] args) {
+        // TODO code application logic here
+        Scanner input=new Scanner(System.in);
+        codes.put("A", "%");
+        codes.put("a", "9");
+        codes.put("B", "@");
+        codes.put("b", "#");
+        codes.put("C", "1");
+        codes.put("c", "2");
+        codes.put("D", "3");
+        codes.put("d", "4");
+        codes.put("E", "5");
+        codes.put("e", "6");
+        codes.put("F", "7");
+        codes.put("f", "9");
+        codes.put("G", "0");
+        codes.put("g", "}");
+        codes.put("H", "{");
+        codes.put("h", "]");
+        codes.put("I", "[");
+        codes.put("i", ",");
+        codes.put("J", ".");
+        codes.put("j", ">");
+        codes.put("K", "<");
+        codes.put("k", "/");
+        codes.put("L", "0");
+        codes.put("l", "\\");
+        codes.put("M", "\\"+"\"");
+        codes.put("m", ":");
+        codes.put("N", ";");
+        codes.put("n", "+");
+        codes.put("O", "$");
+        codes.put("o", "-");
+        codes.put("Q", "$");
+        codes.put("q", "%");
+        codes.put("R", "^");
+        codes.put("r", "&");
+        codes.put("S", "*");
+        codes.put("s", "(");
+        codes.put("T", ")");
+        codes.put("t", "~");
+        codes.put("U", "'");
+        codes.put("u", "5");
+        codes.put("V", "\\\\");
+        codes.put("v", "+");
+        codes.put("W", "=");
+        codes.put("w", "7");
+        codes.put("X", "~");
+        codes.put("x", ")");
+        codes.put("Y", "2");
+        codes.put("y", "*");
+        codes.put("Z", "]");
+        codes.put("z", "8");
+        System.out.print("Enter String to encript: ");
+        String a=input.next(),c;
+        String choice;
+        System.out.print("1 for Encript 2 for Decript\t");
+        choice=input.next();
+        int i = 1;
+        if(choice.equals("1")){
+        for(int j=0;j<a.length();j++){
+            for(Map.Entry b : codes.entrySet()){
+                String key=b.getKey().toString();
+                c=""+a.charAt(j)+"";
+                if (key.equals(c)){
+                    System.out.print(b.getValue());
+                    i++;
+                }
+                
+            }
+        }
+        }
+        if(choice.equals("2")){
+        for(int j=0;j<a.length();j++){
+            for(Map.Entry b : codes.entrySet()){
+                String value=b.getValue().toString();
+                c=""+a.charAt(j)+"";
+                if (value.equals(c)){
+                    System.out.print(b.getKey());
+                    i++;
+                }
+
+            }
+        }
+        }
+        
+    }
+}
