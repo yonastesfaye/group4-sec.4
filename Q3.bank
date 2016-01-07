@@ -1,0 +1,153 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package banking_no3;
+
+import java.util.*;
+
+public class banking_no3 {
+    private static Map<String, Customer> Bank = new HashMap<String, Customer>();
+
+    public static void main(String[] args) {
+        // TODO code application logic here
+        manu();
+    }
+    
+    private static void manu(){
+            Scanner input=new Scanner(System.in);
+            System.out.println();
+            System.out.println("1)create a new bank account");
+            System.out.println("2)Update bank account");
+            System.out.println("3)Account Information");
+            System.out.println("PRESS OTHER KEY NUMBER TO EXIT");
+            System.out.println();
+            System.out.print("Enter your choice :");
+            int choice=input.nextInt();
+            switch(choice){
+                case 1:
+                    Add();
+                   break;
+                case 2:{
+                    deposit(display());
+                    manu();
+                    break;
+                }
+                case 3:
+                    display();
+                    break;
+                default :
+                    System.exit(0);
+                    break;
+            }
+            
+    }
+    
+    private static void Add(){
+        Scanner input=new Scanner(System.in);
+        String terminator="t";
+        float balance;
+        while(terminator.equals("t")){
+            System.out.print("Name: ");
+            String name=input.next();
+            System.out.print("Account Number: ");
+            String No=input.next();
+
+            System.out.print("Balance: ");
+            balance=input.nextFloat();
+ 
+            Customer user1=new Customer(name,No,balance);
+            Bank.put(No, user1);
+            
+            System.out.print("Press t To Continue :");
+            terminator=input.next();             
+        }
+        manu();
+    }
+    private static Customer display() {
+        Scanner input=new Scanner(System.in);
+        System.out.println("Enter Account NO:");
+        String value=input.next();
+        for(Map.Entry b : Bank.entrySet()) {
+            Customer c = new Customer();
+            String key=b.getKey().toString();
+            
+            if (key.equals(value)){
+                c = (Customer)b.getValue();
+                System.out.println("\t\tName: "+c.getName());
+                System.out.println("\t\tAccount No: "+c.getNo());
+                System.out.println("\t\tBalance: "+c.getBalance());
+                return c;
+            }
+        }
+        System.out.println("THERE IS NO ACOUNT WITH THIS VALUE!!");
+        manu();
+        return null;
+    }
+    
+    private static void deposit(Customer user){
+        Scanner input = new Scanner(System.in);
+        
+        System.out.println("\n\n\n1 For withdrow\t2 For Deposit\t3 TO GO BACK");
+        int c=input.nextInt();
+        float money;
+        if(c==1){
+            System.out.print("How much money you want: ");
+            money=input.nextFloat();
+            user.withdraw(money);
+        }
+        else if(c==2){
+            System.out.print("How much money is it: ");
+            money=input.nextFloat();
+            user.deposit(money);
+        }
+        else
+              manu();
+        System.out.println("\tName: "+user.getName());
+        System.out.println("\tAccount No: "+user.getNo());   
+        System.out.println("\tBalance: "+user.getBalance()); 
+        System.out.println("Balance Updated");
+        manu();
+    }    
+}
+
+class Customer {
+    private String customer_name,acc_no;
+    float balance;
+    public Customer(){}
+    public Customer(String name,String no,float b){
+        customer_name=name;
+        acc_no=no;
+        balance=b;
+    }
+    
+    public String getName(){
+        return customer_name;
+    }
+    
+    public String getNo(){
+        return acc_no;
+    }
+    public float getBalance(){
+        return balance;
+    }
+    
+    public void deposit(float dep){
+        balance+=dep;
+        System.out.println("Balance updated");
+    }
+    
+    public void withdraw(float wd){
+       
+        if(balance>=wd){
+            balance-=wd;
+            System.out.println("Balance updated");
+        }
+        else
+            System.out.println("Inceficent Balance");
+    }
+    
+    
+}
+  
